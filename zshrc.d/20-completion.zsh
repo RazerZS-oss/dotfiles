@@ -1,4 +1,6 @@
-# Completion & Styling with High-Performance Caching
+# ==============================================================================
+# 20-completion.zsh - High-Performance Completion & LS_COLORS Caching
+# ==============================================================================
 autoload -Uz compinit
 
 # Fast compinit: only re-index completions once every 24 hours
@@ -7,11 +9,11 @@ if [[ -s "$_zcompdump" && $(($(date +%s) - $(stat -f %m "$_zcompdump" 2>/dev/nul
   compinit -C -d "$_zcompdump"
 else
   compinit -d "$_zcompdump"
-  # Byte-compile in background for even faster loads
+  # Byte-compile in background for faster future loads
   { zcompile "$_zcompdump" } 2>/dev/null &!
 fi
 
-# Cache LS_COLORS from vivid (generate once, read instantly)
+# Cache LS_COLORS from vivid (snazzy theme) to eliminate subshell overhead
 _lscache="${XDG_CACHE_HOME:-$HOME/.cache}/ls_colors_snazzy"
 if [[ ! -s "$_lscache" ]] && (( $+commands[vivid] )); then
   mkdir -p "${_lscache:h}"
@@ -26,7 +28,7 @@ fi
 
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
-# Clustered Dropdown Menu
+# Clustered Dropdown Completion Menu
 zstyle ':completion:*:descriptions' format $'\e[1;38;5;212m✦ [ %d ]\e[0m'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select
