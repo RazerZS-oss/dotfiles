@@ -1,0 +1,167 @@
+#!/bin/bash
+
+# ==============================================================================
+# ⚡ SketchyBar - Cyberpunk Neon Theme
+# Dominant Electric Cyan (#00f5ff) & Neon Magenta/Pink (#ff0055)
+# ==============================================================================
+
+sketchybar --bar height=34 \
+               color=0x00000000 \
+               shadow=off \
+               position=top \
+               topmost=window \
+               y_offset=0 \
+               padding_left=16 \
+               padding_right=16
+
+sketchybar --add event window_changed
+
+# ── Clock ──────────────────────────────────────────────
+sketchybar --add item clock_label right \
+           --set clock_label \
+               update_freq=1 \
+               script='sketchybar --set clock_label label="$(date +"%H:%M")"' \
+               label.color=0xffe0f2fe \
+               label.font="SF Pro:Semibold:14" \
+               label.padding_left=6 \
+               label.padding_right=10 \
+               background.drawing=off \
+               padding_left=0 \
+               padding_right=0
+
+sketchybar --add item clock_icon right \
+           --set clock_icon \
+               icon="󰥔" \
+               icon.color=0xff030712 \
+               icon.font="Symbols Nerd Font:Regular:16" \
+               icon.padding_left=8 \
+               icon.padding_right=8 \
+               label.drawing=off \
+               background.drawing=on \
+               background.color=0xff00f5ff \
+               background.height=26 \
+               background.corner_radius=6 \
+               padding_left=0 \
+               padding_right=0
+
+sketchybar --add bracket clock_bracket clock_icon clock_label \
+           --set clock_bracket \
+               background.drawing=on \
+               background.color=0xee091322 \
+               background.height=26 \
+               background.corner_radius=6 \
+               background.border_color=0xff00f5ff \
+               background.border_width=2 \
+               padding_right=10
+
+# ── Spacer ───────────────────────────────────────────────
+sketchybar --add item spacer1 right \
+           --set spacer1 \
+               width=6 \
+               background.drawing=off \
+               icon.drawing=off \
+               label.drawing=off
+
+# ── Battery ───────────────────────────────────────────
+sketchybar --add item battery_label right \
+           --set battery_label \
+               update_freq=30 \
+               script="$HOME/.config/sketchybar/plugins/battery.sh" \
+               label.color=0xffe0f2fe \
+               label.font="SF Pro:Semibold:14" \
+               label.padding_left=6 \
+               label.padding_right=10 \
+               background.drawing=off \
+               padding_left=0 \
+               padding_right=0
+
+sketchybar --add item battery_icon right \
+           --set battery_icon \
+               icon="󰁹" \
+               icon.color=0xff030712 \
+               icon.font="Symbols Nerd Font:Regular:16" \
+               icon.padding_left=8 \
+               icon.padding_right=8 \
+               label.drawing=off \
+               background.drawing=on \
+               background.color=0xffff0055 \
+               background.height=26 \
+               background.corner_radius=6 \
+               padding_left=0 \
+               padding_right=0
+
+sketchybar --add bracket battery_bracket battery_icon battery_label \
+           --set battery_bracket \
+               background.drawing=on \
+               background.color=0xee091322 \
+               background.height=26 \
+               background.corner_radius=6 \
+               background.border_color=0xffff0055 \
+               background.border_width=2 \
+               padding_right=10
+
+# ── Spacer ───────────────────────────────────────────────
+sketchybar --add item spacer2 right \
+           --set spacer2 \
+               width=6 \
+               background.drawing=off \
+               icon.drawing=off \
+               label.drawing=off
+
+# ── Volume ───────────────────────────────────────────────
+sketchybar --add item volume_label right \
+           --set volume_label \
+               script="$HOME/.config/sketchybar/plugins/volume.sh" \
+               label.color=0xffe0f2fe \
+               label.font="SF Pro:Semibold:14" \
+               label.padding_left=6 \
+               label.padding_right=10 \
+               background.drawing=off \
+               padding_left=0 \
+               padding_right=0
+
+sketchybar --subscribe volume_label volume_change
+
+sketchybar --add item volume_icon right \
+           --set volume_icon \
+               icon="󰕾" \
+               icon.color=0xff030712 \
+               icon.font="Symbols Nerd Font:Regular:16" \
+               icon.padding_left=8 \
+               icon.padding_right=8 \
+               label.drawing=off \
+               background.drawing=on \
+               background.color=0xff38bdf8 \
+               background.height=26 \
+               background.corner_radius=6 \
+               padding_left=0 \
+               padding_right=0
+
+sketchybar --add bracket volume_bracket volume_icon volume_label \
+           --set volume_bracket \
+               background.drawing=on \
+               background.color=0xee091322 \
+               background.height=26 \
+               background.corner_radius=6 \
+               background.border_color=0xff38bdf8 \
+               background.border_width=2 \
+               padding_right=10
+
+# ── Active Windows Ribbon ──────────────────────────────────
+sketchybar --add item windows_trigger left \
+           --set windows_trigger \
+               script="$HOME/.config/sketchybar/plugins/windows.sh" \
+               update_freq=5 \
+               icon.drawing=off \
+               label.drawing=off \
+               background.drawing=off \
+               padding_left=0 \
+               padding_right=0
+
+sketchybar --subscribe windows_trigger front_app_switched space_change
+sketchybar --update
+
+# ── Auto-toggle with native macOS menu bar ──────────────────
+pkill -x sketchybar-toggle
+sketchybar-toggle &
+

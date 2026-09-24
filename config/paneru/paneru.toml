@@ -1,0 +1,99 @@
+# ==============================================================================
+# ⚡ Paneru Configuration (Niri Left-Aligned Snapping - No Auto-Centering!)
+# ==============================================================================
+
+[options]
+# Left-aligned snapping like Niri (do NOT force-center windows on focus)
+auto_center = false
+
+# How much a window can be hidden before snapping into view (0.0 = eager snap to edge)
+window_hidden_ratio = 0.0
+
+focus_follows_mouse = true
+mouse_follows_focus = false
+preset_column_widths = [0.33, 0.50, 0.67, 1.00]
+window_resize_cycle = false
+animation_speed = 20.0
+sliver_width = 0
+sliver_height = 1.0
+
+# Hold Option and drag mouse near left/right window edge to resize freely
+mouse_resize_modifier = "alt"
+
+[padding]
+top = 6
+bottom = 6
+left = 6
+right = 6
+
+[swipe]
+# Multi-touch ribbon navigation (3-finger swipe like Option+H and Option+L)
+sensitivity = 0.5
+deceleration = 4.0
+# Snap windows to the edge of the display instead of exposing empty floating space
+continuous = false
+
+[swipe.gesture]
+fingers_count = 3
+direction = "Natural"
+vertical = false
+
+[swipe.scroll]
+# Hold Option + scroll (mouse wheel or 2 fingers) to slide the ribbon freely
+modifier = "alt"
+
+# ------------------------------------------------------------------------------
+# SHORTCUTS:
+# ------------------------------------------------------------------------------
+[bindings]
+# Focus Navigation
+window_focus_west = "alt - h"
+window_focus_east = "alt - l"
+
+# Move / Swap Windows
+window_swap_west = "alt - j"
+window_swap_east = "alt - k"
+
+# Niri-Style Resizing:
+# Option + R (or Option + =) -> Expand width
+# Option + - -> Shrink width
+window_resize = ["alt - r", "alt - equal"]
+window_shrink = "alt - minus"
+
+# Toggle Full-Width Window (Niri-style fullscreen on ribbon!)
+window_fullwidth = "alt - f"
+
+# Snap window to screen edge (Left-aligned flush snap!)
+window_snap = "alt - s"
+
+# Toggle Tile / Float (Bring any window into or out of Paneru mode!)
+window_manage = ["alt - m", "alt - t"]
+
+# Center Window (Manual only, when you explicitly want it)
+window_center = "alt - c"
+
+# Quit Daemon
+quit = "alt - q"
+
+# ------------------------------------------------------------------------------
+# Floating Rules
+# ------------------------------------------------------------------------------
+[windows.finder]
+bundle_id = "com.apple.finder"
+title = ".*"
+floating = true
+
+[windows.settings]
+bundle_id = "com.apple.systempreferences"
+title = ".*"
+floating = true
+
+[windows.whatsapp]
+bundle_id = "net.whatsapp.WhatsApp"
+title = ".*"
+floating = true
+
+[windows.orbstack]
+bundle_id = "dev.kdrag0n.MacVirt"
+title = ".*"
+manage = false

@@ -1,0 +1,10 @@
+theme = cyberpunk-neon
+font-size = 14
+cursor-style = block
+cursor-style-blink = true
+window-padding-x = 14
+window-padding-y = 12
+macos-titlebar-style = transparent
+background-opacity = 0.50
+background-blur-radius = 70
+macos-option-as-alt = true

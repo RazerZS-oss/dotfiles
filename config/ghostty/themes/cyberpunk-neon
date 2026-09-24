@@ -1,0 +1,27 @@
+# Cyberpunk Ultra Neon (Dominant Electric Cyan & Vivid Blue)
+background = 030712
+foreground = e0f2fe
+cursor-color = 00f5ff
+cursor-text = 030712
+selection-background = 163b66
+selection-foreground = 00f5ff
+
+# Standard Colors (Cyan & Blue Dominant)
+palette = 0=#091322
+palette = 1=#ff0055
+palette = 2=#00f5ff
+palette = 3=#38bdf8
+palette = 4=#0066ff
+palette = 5=#7b2cbf
+palette = 6=#00ffff
+palette = 7=#f0f9ff
+
+# Bright Colors (Supercharged Neon Blue & Ice Glow)
+palette = 8=#1e3a5f
+palette = 9=#ff3377
+palette = 10=#5dfcff
+palette = 11=#7dd3fc
+palette = 12=#3a86ff
+palette = 13=#a855f7
+palette = 14=#67e8f9
+palette = 15=#ffffff

@@ -1,0 +1,27 @@
+# Dracula Midnight (Purple & Magenta Aesthetic)
+background = 0f0e17
+foreground = f8f8f2
+cursor-color = bd93f9
+cursor-text = 0f0e17
+selection-background = 44475a
+selection-foreground = f8f8f2
+
+# Normal Colors
+palette = 0=#191a21
+palette = 1=#ff5555
+palette = 2=#50fa7b
+palette = 3=#f1fa8c
+palette = 4=#bd93f9
+palette = 5=#ff79c6
+palette = 6=#8be9fd
+palette = 7=#f8f8f2
+
+# Bright Colors
+palette = 8=#6272a4
+palette = 9=#ff6e6e
+palette = 10=#69ff94
+palette = 11=#ffffa5
+palette = 12=#d6acff
+palette = 13=#ff92df
+palette = 14=#a4ffff
+palette = 15=#ffffff

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# JankyBorders - Blue & Red Theme
+# Active Window (Focus): Electric Blue (#00f5ff)
+# Inactive Windows: Neon Red (#ff0055)
+borders \
+    style=round \
+    width=5.0 \
+    hidpi=on \
+    ax_focus=on \
+    active_color=0xff00f5ff \
+    inactive_color=0xffff0055
