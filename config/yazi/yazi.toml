@@ -1,9 +1,10 @@
 # ==============================================================================
 # Yazi Configuration (Terminal File Manager)
 # ==============================================================================
-# Opens files in Neovim (nvim) by default, with automatic fallback to $EDITOR or nano.
+# Opens selected files directly in Neovim for editing, with automatic fallback
+# to $EDITOR or nano if Neovim is not installed.
 
 [opener]
 edit = [
-	{ run = 'if command -v nvim >/dev/null 2>&1; then nvim "$@"; elif [ -n "$EDITOR" ]; then "$EDITOR" "$@"; else nano "$@"; fi', block = true, desc = "Editor (Neovim / Fallback)", for = "unix" },
+	{ run = 'sh -c "command -v nvim >/dev/null 2>&1 && exec nvim \"\$@\" || exec \${EDITOR:-nano} \"\$@\"" -- %s', block = true, desc = "Neovim / Editor", for = "unix" },
 ]
