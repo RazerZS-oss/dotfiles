@@ -1,5 +1,5 @@
 # ==============================================================================
-# 📦 Homebrew Bundle Manifest (Brewfile)
+# Homebrew Bundle Manifest (Brewfile)
 # ==============================================================================
 
 # Custom Formula Taps
@@ -11,6 +11,7 @@ brew "eza"
 brew "fastfetch"
 brew "fzf"
 brew "micro"
+brew "neovim"
 brew "vivid"
 brew "yazi"
 brew "zsh-autosuggestions"

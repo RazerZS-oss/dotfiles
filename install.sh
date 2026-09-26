@@ -168,6 +168,7 @@ backup_and_link "${SOURCE_DIR}/config/fastfetch" "${TARGET_HOME}/.config/fastfet
 backup_and_link "${SOURCE_DIR}/config/ghostty" "${TARGET_HOME}/.config/ghostty"
 backup_and_link "${SOURCE_DIR}/config/paneru" "${TARGET_HOME}/.config/paneru"
 backup_and_link "${SOURCE_DIR}/config/sketchybar" "${TARGET_HOME}/.config/sketchybar"
+backup_and_link "${SOURCE_DIR}/config/yazi" "${TARGET_HOME}/.config/yazi"
 
 # 5. Setup fzf-tab plugin
 if [[ ! -d "${TARGET_HOME}/.zsh/fzf-tab" ]]; then

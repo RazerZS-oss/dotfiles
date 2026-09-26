@@ -78,13 +78,15 @@ dotfiles/
 │   │   └── themes/
 │   ├── paneru/                     # Niri-style sliding window manager
 │   │   └── paneru.toml
-│   └── sketchybar/                 # Dynamic status bar and event-driven plugins
-│       ├── sketchybarrc
-│       └── plugins/
-│           ├── battery.sh
-│           ├── date.sh
-│           ├── volume.sh
-│           └── windows.sh
+│   ├── sketchybar/                 # Dynamic status bar and event-driven plugins
+│   │   ├── sketchybarrc
+│   │   └── plugins/
+│   │       ├── battery.sh
+│   │       ├── date.sh
+│   │       ├── volume.sh
+│   │       └── windows.sh
+│   └── yazi/                       # Yazi terminal file manager configuration
+│       └── yazi.toml
 ├── scripts/
 │   ├── macos_speedup.sh            # Animation and keyboard repeat optimizations
 │   └── reset_windows.sh            # Emergency window rescue script
@@ -145,10 +147,10 @@ For automated or unattended setups:
 
 ### 1. Modular Zsh Suite (`~/.zshrc.d/`)
 Rather than maintaining a single large `.zshrc` file, the shell configuration is partitioned into structured, isolated modules loaded in numerical sequence:
-- **`10-env.zsh`**: Dynamically detects the correct Homebrew environment (`/opt/homebrew` on Apple Silicon or `/usr/local` on Intel), exports `$HOME/.local/bin` to `PATH`, sets `BAT_THEME="Dracula"`, and detects the default editor (`micro` -> `nano` -> `vim`).
+- **`10-env.zsh`**: Dynamically detects the correct Homebrew environment (`/opt/homebrew` on Apple Silicon or `/usr/local` on Intel), exports `$HOME/.local/bin` to `PATH`, sets `BAT_THEME="Dracula"`, and detects the default editor (`nvim` -> `micro` -> `nano` -> `vim`).
 - **`20-completion.zsh`**: Checks file modification timestamps on `.zcompdump` to ensure expensive re-indexing only happens once per day. Spawns background byte-compilation (`zcompile &!`) and reads pre-cached vivid `LS_COLORS`.
 - **`30-fzf.zsh`**: Configures `fzf-tab` dropdown completions with real-time directory listing via `eza` and file syntax preview via `bat`.
-- **`40-aliases.zsh`**: Ergonomic shortcuts (`ls` -> `eza`, `cat` -> `bat`, `edit` -> `micro`, `z`/`zed` -> Zed editor, `yy` -> Yazi).
+- **`40-aliases.zsh`**: Ergonomic shortcuts (`ls` -> `eza`, `cat` -> `bat`, `edit` -> `nvim`, `vim` -> `nvim`, `z`/`zed` -> Zed editor, `yy` -> Yazi).
 - **`50-plugins.zsh`**: Integrates syntax highlighting and command autosuggestions directly from Homebrew without third-party framework overhead.
 - **`60-vim-keybindings.zsh`**: Complete Vim editing engine:
   - Instant transition between Insert and Command mode (`Esc` / `i`).

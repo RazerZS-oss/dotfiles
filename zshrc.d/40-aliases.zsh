@@ -16,7 +16,10 @@ if (( $+commands[bat] )); then
 fi
 
 # Editors
-if (( $+commands[micro] )); then
+if (( $+commands[nvim] )); then
+  alias edit='nvim'
+  alias vim='nvim'
+elif (( $+commands[micro] )); then
   alias edit='micro'
   alias nano='micro'
 fi

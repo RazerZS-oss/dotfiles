@@ -20,11 +20,17 @@ fi
 export BAT_THEME="Dracula"
 export CLICOLOR=1
 
-# Default Editor: micro -> nano -> vim
-if (( $+commands[micro] )); then
+# Default Editor: nvim -> micro -> nano -> vim
+if (( $+commands[nvim] )); then
+  export EDITOR='nvim'
+  export VISUAL='nvim'
+elif (( $+commands[micro] )); then
   export EDITOR='micro'
+  export VISUAL='micro'
 elif (( $+commands[nano] )); then
   export EDITOR='nano'
+  export VISUAL='nano'
 else
   export EDITOR='vim'
+  export VISUAL='vim'
 fi
