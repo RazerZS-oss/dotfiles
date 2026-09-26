@@ -1,17 +1,9 @@
 # ==============================================================================
 # Yazi Configuration (Terminal File Manager)
 # ==============================================================================
-# Sets Neovim (nvim) as the default opener for all text and code files.
+# Opens files in Neovim (nvim) by default, with automatic fallback to $EDITOR or nano.
 
 [opener]
 edit = [
-	{ run = 'nvim "$@"', block = true, desc = "Neovim" },
-]
-
-[open]
-rules = [
-	{ name = "*/", use = [ "edit", "open", "reveal" ] },
-	{ mime = "text/*", use = [ "edit", "reveal" ] },
-	{ mime = "application/{json,x-ndjson,javascript,typescript,x-yaml,toml,x-sh}", use = [ "edit", "reveal" ] },
-	{ name = "*.{md,txt,csv,json,toml,yaml,yml,lua,sh,zsh,bash,php,py,rs,js,ts,tsx,jsx,html,css,scss,conf,rc}", use = [ "edit", "reveal" ] },
+	{ run = 'if command -v nvim >/dev/null 2>&1; then nvim "$@"; elif [ -n "$EDITOR" ]; then "$EDITOR" "$@"; else nano "$@"; fi', block = true, desc = "Editor (Neovim / Fallback)", for = "unix" },
 ]

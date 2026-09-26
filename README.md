@@ -102,11 +102,16 @@ dotfiles/
 
 ## Quick Start Installation
 
-### Prerequisites
+### Prerequisites & Tool Fallbacks
 
-- macOS running on **Apple Silicon (M1/M2/M3/M4)** or **Intel (x86_64)**.
-- [Homebrew](https://brew.sh) package manager.
-- Git (comes with macOS Developer Tools: `xcode-select --install`).
+- **macOS**: Apple Silicon (M1/M2/M3/M4) or Intel (x86_64).
+- **Homebrew**: Package manager (installed automatically by `install.sh` if missing).
+- **Recommended Tools**: `neovim`, `yazi`, `eza`, `bat`, `paneru`, `borders`, `sketchybar`, `vivid`, `fzf`.
+- **Safe Fallbacks**: If you choose not to install any recommended tool, all configurations automatically fall back to native tools so your system runs without errors:
+  - Missing Neovim: Yazi and shell automatically fall back to `micro`, `nano`, or `vim`.
+  - Missing Eza: Shell falls back to standard `ls -la`.
+  - Missing Bat: Shell and FZF previews fall back to standard `cat` and `head`.
+  - Missing Paneru/Borders: Native macOS window management continues as normal.
 
 ### Automated Setup
 

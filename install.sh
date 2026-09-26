@@ -108,21 +108,71 @@ confirm() {
   fi
 }
 
-# 2. Package Management with Homebrew
+# 2. Package Management & Environment Audit
 if [[ "$SKIP_BREW" == false ]]; then
-  if command -v brew >/dev/null 2>&1; then
-    log_info "Homebrew found."
-    if [[ -f "${SOURCE_DIR}/Brewfile" ]]; then
-      if confirm "Would you like to install/bundle required packages via Homebrew (Brewfile)?"; then
+  # Check Homebrew availability
+  if ! command -v brew >/dev/null 2>&1; then
+    log_warn "Homebrew is not installed."
+    echo "    Homebrew is recommended to install Neovim, Yazi, Paneru, Borders, Sketchybar, etc."
+    if confirm "Would you like to install Homebrew automatically now?"; then
+      log_info "Installing Homebrew..."
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      if [[ -x /opt/homebrew/bin/brew ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+      elif [[ -x /usr/local/bin/brew ]]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+      fi
+    else
+      log_warn "Proceeding without Homebrew. Built-in system tools (nano, vim, ls, cat) will be used as fallbacks."
+    fi
+  fi
+
+  # Audit Recommended Environment Tools
+  echo ""
+  log_info "Checking recommended environment tools:"
+  tools=(
+    "nvim:Neovim (primary editor for Yazi & shell)"
+    "yazi:Terminal file manager"
+    "eza:Modern ls replacement with file icons"
+    "bat:Syntax-highlighted cat pager"
+    "fzf:Fuzzy finder for completions & history"
+    "vivid:LS_COLORS generator for shell highlighting"
+    "paneru:Niri-style sliding window manager"
+    "borders:JankyBorders window outline styling"
+    "sketchybar:Dynamic macOS status bar"
+  )
+
+  missing_tools=()
+  for item in "${tools[@]}"; do
+    cmd="${item%%:*}"
+    desc="${item#*:}"
+    if command -v "$cmd" >/dev/null 2>&1; then
+      echo -e "  ${GREEN}[OK]${RESET}  ${BOLD}${cmd}${RESET} - ${desc}"
+    else
+      echo -e "  ${YELLOW}[--]${RESET}  ${BOLD}${cmd}${RESET} - ${desc} ${YELLOW}(missing)${RESET}"
+      missing_tools+=("$cmd")
+    fi
+  done
+  echo ""
+
+  if [[ ${#missing_tools[@]} -gt 0 ]]; then
+    log_warn "Detected ${#missing_tools[@]} missing recommended tool(s)."
+    echo "    Without these tools, your shell will automatically use built-in fallbacks:"
+    echo "    • Missing Neovim: Yazi and shell will safely fall back to micro, nano, or vim."
+    echo "    • Missing Eza: Shell will fall back to standard 'ls -la'."
+    echo "    • Missing Bat: Shell and FZF previews will fall back to standard 'cat' and 'head'."
+    echo ""
+    if command -v brew >/dev/null 2>&1 && [[ -f "${SOURCE_DIR}/Brewfile" ]]; then
+      if confirm "Would you like to install all recommended tools now via Homebrew (Brewfile)?"; then
         log_info "Executing 'brew bundle --file=${SOURCE_DIR}/Brewfile'..."
         brew bundle --file="${SOURCE_DIR}/Brewfile" || log_warn "Some Homebrew packages had warnings or were already installed."
-        log_success "Homebrew packages ready."
+        log_success "All recommended packages are now installed."
       else
-        log_warn "Skipped Homebrew bundle."
+        log_info "Skipped package installation. Built-in safe fallbacks will remain active."
       fi
     fi
   else
-    log_warn "Homebrew not found. Install it from https://brew.sh to get eza, bat, paneru, borders, sketchybar, etc."
+    log_success "All recommended environment tools are already installed!"
   fi
 fi
 
