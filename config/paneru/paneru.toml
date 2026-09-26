@@ -22,7 +22,7 @@ mouse_resize_modifier = "alt"
 
 [padding]
 top = 6
-bottom = 6
+bottom = 40 # Clear macOS Dock (default ~50-64px tile size) and window borders
 left = 6
 right = 6
 

@@ -1,4 +1,4 @@
-# ⚡ macOS Apple Silicon & Intel Modular Dotfiles Suite
+# macOS Modular Dotfiles Suite
 
 <p align="center">
   <img src="https://img.shields.io/badge/macOS-Apple%20Silicon%20%26%20Intel-black?style=for-the-badge&logo=apple" alt="macOS" />
@@ -9,47 +9,48 @@
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" />
 </p>
 
-A blazingly fast, aesthetically curated, and completely modular dotfiles suite for **macOS (Apple Silicon M1/M2/M3/M4 & Intel)**. 
+A fast, curated, and modular dotfiles suite for macOS (Apple Silicon M1/M2/M3/M4 and Intel).
 
-Engineered for keyboard-driven efficiency, instantaneous shell startup, buttery smooth window navigation, and zero-latency macOS UI interactions.
+Engineered for keyboard-driven efficiency, instantaneous shell startup, smooth window navigation, and zero-latency macOS UI interactions.
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
-- [✨ Highlights](#-highlights)
-- [📦 Repository Architecture](#-repository-architecture)
-- [🚀 Quick Start Installation](#-quick-start-installation)
+- [Highlights](#highlights)
+- [Repository Architecture](#repository-architecture)
+- [Quick Start Installation](#quick-start-installation)
   - [Prerequisites](#prerequisites)
-  - [Automated 1-Step Setup](#automated-1-step-setup)
+  - [Automated Setup](#automated-setup)
   - [Installer Flags](#installer-flags)
-- [🧩 Detailed Breakdown of Components](#-detailed-breakdown-of-components)
+- [Detailed Breakdown of Components](#detailed-breakdown-of-components)
   - [1. Modular Zsh Suite (`~/.zshrc.d/`)](#1-modular-zsh-suite-zshrcd)
   - [2. Niri-Style Sliding Window Manager (`paneru`)](#2-niri-style-sliding-window-manager-paneru)
-  - [3. Dynamic Status Bar & Borders (`sketchybar` & `borders`)](#3-dynamic-status-bar--borders-sketchybar--borders)
+  - [3. Dynamic Status Bar and Borders (`sketchybar` and `borders`)](#3-dynamic-status-bar-and-borders-sketchybar-and-borders)
   - [4. High-Performance Terminal (`ghostty`)](#4-high-performance-terminal-ghostty)
   - [5. macOS Latency Elimination (`macos_speedup.sh`)](#5-macos-latency-elimination-macos_speedupsh)
-- [⌨️ Keybindings Cheat Sheet](#%EF%B8%8F-keybindings-cheat-sheet)
+- [Keybindings Cheat Sheet](#keybindings-cheat-sheet)
   - [Paneru Window Management](#paneru-window-management)
   - [Zsh Vim Navigation](#zsh-vim-navigation)
-- [🔄 Safe Backup & Rollback](#-safe-backup--rollback)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
+- [Safe Backup and Rollback](#safe-backup-and-rollback)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
-## ✨ Highlights
+## Highlights
 
-- 🏎️ **Sub-15ms Zsh Startup**: High-efficiency shell loader using 24-hour cached `compinit` bytecode (`.zwc`) and pre-cached `vivid` syntax colors (`LS_COLORS`).
-- ⌨️ **Vim-Mode Terminal with Dynamic Cursor**: Auto-switches between a Solid Block (`█`) in Vim command mode and a Pipe (`|`) in Insert mode, paired with instant typed-prefix history search.
-- 🪟 **Sliding Ribbon Window Management**: Smooth scrolling window ribbons powered by `paneru` (inspired by Linux's Niri) with left-aligned eager snapping, multi-touch trackpad gestures, and zero auto-centering lag.
-- 🎨 **Unified Aesthetic Palette**: Dracula & Cyberpunk Snazzy styling across Ghostty, Sketchybar, JankyBorders, FZF-tab, and Fastfetch.
-- 🛡️ **Non-Destructive & Safe Installer**: Automatically creates timestamped backups in `~/.dotfiles_backup/` before linking any configuration file.
-- ⚡ **Zero-Delay macOS UI**: Optional system optimizations to strip artificial Dock hover delays and set an ultra-fast 15ms keyboard repeat rate.
+- **Sub-15ms Zsh Startup**: High-efficiency shell loader using 24-hour cached `compinit` bytecode (`.zwc`) and pre-cached `vivid` syntax colors (`LS_COLORS`).
+- **Vim-Mode Terminal with Dynamic Cursor**: Auto-switches between a Solid Block in Vim command mode and a Pipe in Insert mode, paired with instant typed-prefix history search.
+- **Sliding Ribbon Window Management**: Smooth scrolling window ribbons powered by `paneru` (inspired by Linux's Niri) with left-aligned eager snapping, multi-touch trackpad gestures, and zero auto-centering lag.
+- **Dock-Aware Padding**: Configured with bottom padding to cleanly separate tiled application windows and borders from the macOS Dock.
+- **Unified Aesthetic Palette**: Dracula and Cyberpunk Snazzy styling across Ghostty, Sketchybar, JankyBorders, FZF-tab, and Fastfetch.
+- **Non-Destructive and Safe Installer**: Automatically creates timestamped backups in `~/.dotfiles_backup/` before linking any configuration file.
+- **Zero-Delay macOS UI**: Optional system optimizations to strip artificial Dock hover delays and set a fast 15ms keyboard repeat rate.
 
 ---
 
-## 📦 Repository Architecture
+## Repository Architecture
 
 All configurations adhere strictly to the standard XDG directory layout and modular shell design:
 
@@ -58,19 +59,19 @@ dotfiles/
 ├── .zshrc                          # Lightweight root loader sourcing ~/.zshrc.d/*.zsh
 ├── zshrc.d/                        # Cleanly separated, numbered Zsh modules
 │   ├── 10-env.zsh                  # Portable brew paths, PATH, default editor
-│   ├── 20-completion.zsh           # Fast compinit (24h cache) & vivid snazzy LS_COLORS
-│   ├── 30-fzf.zsh                  # fzf-tab & Dracula/Snazzy interactive preview styles
+│   ├── 20-completion.zsh           # Fast compinit (24h cache) and vivid snazzy LS_COLORS
+│   ├── 30-fzf.zsh                  # fzf-tab and Dracula/Snazzy interactive preview styles
 │   ├── 40-aliases.zsh              # eza, bat, zed, yazi, and ghostty shortcuts
-│   ├── 50-plugins.zsh              # Dynamic syntax highlighting & autosuggestions
+│   ├── 50-plugins.zsh              # Dynamic syntax highlighting and autosuggestions
 │   ├── 60-vim-keybindings.zsh      # Vim mode, block/beam cursor, prefix history search
-│   ├── 70-functions.zsh            # Custom functions & hooks (suppresses cd noise)
+│   ├── 70-functions.zsh            # Custom functions and hooks (suppresses cd noise)
 │   └── 80-prompt.zsh               # Clean 2-line minimal prompt with realtime Vim status
 ├── config/                         # Mirrors ~/.config/
 │   ├── borders/                    # JankyBorders window outline styling
 │   │   └── bordersrc
 │   ├── fastfetch/                  # Fastfetch system specification layout
 │   │   └── config.jsonc
-│   ├── ghostty/                    # Ghostty terminal config, themes & manager scripts
+│   ├── ghostty/                    # Ghostty terminal config, themes and manager scripts
 │   │   ├── config
 │   │   ├── config-manager.sh
 │   │   ├── theme-picker.sh
@@ -85,19 +86,19 @@ dotfiles/
 │           ├── volume.sh
 │           └── windows.sh
 ├── scripts/
-│   ├── macos_speedup.sh            # Animation & keyboard repeat optimizations
+│   ├── macos_speedup.sh            # Animation and keyboard repeat optimizations
 │   └── reset_windows.sh            # Emergency window rescue script
 ├── assets/
 │   └── wallpaper.jpg               # Curated desktop wallpaper
-├── Brewfile                        # Declarative list of Homebrew formulae & casks
+├── Brewfile                        # Declarative list of Homebrew formulae and casks
 ├── install.sh                      # Universal automated installer
 ├── LICENSE                         # MIT License
-└── README.md                       # Documentation & setup guide
+└── README.md                       # Documentation and setup guide
 ```
 
 ---
 
-## 🚀 Quick Start Installation
+## Quick Start Installation
 
 ### Prerequisites
 
@@ -105,7 +106,7 @@ dotfiles/
 - [Homebrew](https://brew.sh) package manager.
 - Git (comes with macOS Developer Tools: `xcode-select --install`).
 
-### Automated 1-Step Setup
+### Automated Setup
 
 Clone the repository to `~/.dotfiles` and launch the automated installer:
 
@@ -123,7 +124,7 @@ The installer will:
 5. Install the `fzf-tab` plugin for interactive completion dropdowns.
 6. Offer to apply macOS UI speedups.
 
-Once complete, simply reload your terminal:
+Once complete, reload your terminal:
 ```bash
 source ~/.zshrc
 ```
@@ -140,18 +141,18 @@ For automated or unattended setups:
 
 ---
 
-## 🧩 Detailed Breakdown of Components
+## Detailed Breakdown of Components
 
 ### 1. Modular Zsh Suite (`~/.zshrc.d/`)
-Rather than maintaining a bloated, unmaintainable single `.zshrc` file, the shell configuration is partitioned into structured, isolated modules loaded in numerical sequence:
-- **`10-env.zsh`**: Dynamically detects the correct Homebrew environment (`/opt/homebrew` on Apple Silicon or `/usr/local` on Intel), exports `$HOME/.local/bin` to `PATH`, sets `BAT_THEME="Dracula"`, and detects the default editor (`micro` $\rightarrow$ `nano` $\rightarrow$ `vim`).
+Rather than maintaining a single large `.zshrc` file, the shell configuration is partitioned into structured, isolated modules loaded in numerical sequence:
+- **`10-env.zsh`**: Dynamically detects the correct Homebrew environment (`/opt/homebrew` on Apple Silicon or `/usr/local` on Intel), exports `$HOME/.local/bin` to `PATH`, sets `BAT_THEME="Dracula"`, and detects the default editor (`micro` -> `nano` -> `vim`).
 - **`20-completion.zsh`**: Checks file modification timestamps on `.zcompdump` to ensure expensive re-indexing only happens once per day. Spawns background byte-compilation (`zcompile &!`) and reads pre-cached vivid `LS_COLORS`.
 - **`30-fzf.zsh`**: Configures `fzf-tab` dropdown completions with real-time directory listing via `eza` and file syntax preview via `bat`.
-- **`40-aliases.zsh`**: Ergonomic shortcuts (`ls` $\rightarrow$ `eza`, `cat` $\rightarrow$ `bat`, `edit` $\rightarrow$ `micro`, `z`/`zed` $\rightarrow$ Zed editor, `yy` $\rightarrow$ Yazi).
+- **`40-aliases.zsh`**: Ergonomic shortcuts (`ls` -> `eza`, `cat` -> `bat`, `edit` -> `micro`, `z`/`zed` -> Zed editor, `yy` -> Yazi).
 - **`50-plugins.zsh`**: Integrates syntax highlighting and command autosuggestions directly from Homebrew without third-party framework overhead.
 - **`60-vim-keybindings.zsh`**: Complete Vim editing engine:
   - Instant transition between Insert and Command mode (`Esc` / `i`).
-  - Terminal cursor shape morphing: **Pipe** (`|`) in Insert mode, **Block** (`█`) in Command mode.
+  - Terminal cursor shape morphing: **Pipe** in Insert mode, **Block** in Command mode.
   - Native typed-prefix history lookup via `Up`/`Down` and `k`/`j`.
   - Pressing `Ctrl + C` instantly cancels the line and resets status to `[ INSERT ]`.
 - **`70-functions.zsh`**: Cleans up shell output by silencing automatic directory listings on `cd`.
@@ -165,11 +166,12 @@ Configured in `config/paneru/paneru.toml`:
 - **Eager Left Alignment**: Windows snap flush to the left edge of the screen rather than being forced into the center.
 - **Multi-Touch Gestures**: Seamless 3-finger swipe navigation to scroll between active windows.
 - **Preset Column Widths**: Effortlessly toggle between `1/3`, `1/2`, `2/3`, and full screen (`1.0`).
+- **Dock-Aware Bottom Padding**: Configured with `[padding] bottom = 40` to guarantee that application windows and window borders maintain a clean margin above the macOS Dock when the Dock is persistently visible. If you use Dock autohide, you can change `bottom` to `6` in `~/.config/paneru/paneru.toml`.
 - **Emergency Window Reset**: If a display disconnects or windows ever drift off-screen, run `./scripts/reset_windows.sh` to immediately snap all windows back to the primary display.
 
 ---
 
-### 3. Dynamic Status Bar & Borders (`sketchybar` & `borders`)
+### 3. Dynamic Status Bar and Borders (`sketchybar` and `borders`)
 - **JankyBorders (`config/borders/bordersrc`)**: Clean, rounded window borders highlighting the active focused window.
 - **SketchyBar (`config/sketchybar/sketchybarrc`)**: Minimalist status bar displaying workspace indicators, active window titles, volume levels, battery charge, and time with dynamic event hooks.
 
@@ -192,17 +194,17 @@ Located in `config/ghostty/`:
 ### 5. macOS Latency Elimination (`macos_speedup.sh`)
 macOS introduces built-in animation delays that make fast machines feel sluggish. `scripts/macos_speedup.sh` strips this overhead:
 - **Instant Dock**: Eliminates the 0.5s auto-hide hover pause (`autohide-delay = 0`) and sets a crisp 0.12s slide animation.
-- **Lightning Key Repeat**: Lowers initial key repeat delay to `10` (150ms) and repeat rate to `1` (15ms)—essential for smooth Vim navigation.
-- **Quick-Look & Window Snappiness**: Disables window resize and dialog slide delays.
+- **Fast Key Repeat**: Lowers initial key repeat delay to `10` (150ms) and repeat rate to `1` (15ms) for smooth Vim navigation.
+- **Quick-Look and Window Snappiness**: Disables window resize and dialog slide delays.
 
-*To revert macOS animations back to factory defaults at any time:*
+To revert macOS animations back to factory defaults at any time:
 ```bash
 ./scripts/macos_speedup.sh --revert
 ```
 
 ---
 
-## ⌨️ Keybindings Cheat Sheet
+## Keybindings Cheat Sheet
 
 ### Paneru Window Management
 
@@ -224,25 +226,25 @@ macOS introduces built-in animation delays that make fast machines feel sluggish
 
 | Mode | Keybinding | Action |
 | :--- | :--- | :--- |
-| **Insert** | `Esc` | Enter Vim Command Mode (Cursor becomes `█`) |
-| **Insert** | `Ctrl + K` / `▲` | Search history upward matching typed prefix |
-| **Insert** | `Ctrl + J` / `▼` | Search history downward matching typed prefix |
-| **Vim (Cmd)** | `i` / `a` | Enter Insert Mode (Cursor becomes `\|`) |
+| **Insert** | `Esc` | Enter Vim Command Mode (Cursor becomes block) |
+| **Insert** | `Ctrl + K` / `Up` | Search history upward matching typed prefix |
+| **Insert** | `Ctrl + J` / `Down` | Search history downward matching typed prefix |
+| **Vim (Cmd)** | `i` / `a` | Enter Insert Mode (Cursor becomes pipe) |
 | **Vim (Cmd)** | `k` / `j` | Search history by typed prefix |
 | **Vim (Cmd)** | `v` / `V` | Visual / Visual Line selection mode |
 | **Vim (Cmd)** | `x` / `Backspace` | Delete character |
-| **Global** | `Ctrl + C` | Cancel line & reset status to `[ INSERT ]` |
+| **Global** | `Ctrl + C` | Cancel line and reset status to `[ INSERT ]` |
 
 ---
 
-## 🔄 Safe Backup & Rollback
+## Safe Backup and Rollback
 
 Before linking any configuration, `install.sh` saves your previous files in:
 ```plaintext
 ~/.dotfiles_backup/YYYYMMDD_HHMMSS/
 ```
 
-To restore an old configuration, simply copy the backed-up directory back to `$HOME`:
+To restore an old configuration, copy the backed-up directory back to `$HOME`:
 ```bash
 cp -R ~/.dotfiles_backup/<timestamp>/.zshrc ~/.zshrc
 cp -R ~/.dotfiles_backup/<timestamp>/.config/* ~/.config/
@@ -250,13 +252,13 @@ cp -R ~/.dotfiles_backup/<timestamp>/.config/* ~/.config/
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-Contributions, issues, and suggestions are welcome! Feel free to open an issue or pull request on GitHub.
+Contributions, issues, and suggestions are welcome. Feel free to open an issue or pull request on GitHub.
 
 ---
 
-## 📄 License
+## License
 
 This repository is licensed under the [MIT License](LICENSE).
-Created with 💜 by [RazerZS-oss](https://github.com/RazerZS-oss).
+Created by [RazerZS-oss](https://github.com/RazerZS-oss).
