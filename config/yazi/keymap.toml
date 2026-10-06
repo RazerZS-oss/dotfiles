@@ -1,0 +1,13 @@
+# ==============================================================================
+# Yazi Keymap Configuration (Vim-style Quit & Navigation)
+# ==============================================================================
+
+[[mgr.prepend_keymap]]
+on   = [ "q" ]
+run  = "quit"
+desc = "Quit and cd to current directory"
+
+[[mgr.prepend_keymap]]
+on   = [ "Q" ]
+run  = "quit --no-cwd-file"
+desc = "Quit without changing directory"

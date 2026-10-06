@@ -28,13 +28,7 @@ fi
 alias z="open -a Zed"
 alias zed="open -a Zed"
 alias gsc='git status | pbcopy'
-
-# Terminal File Manager (yazi)
-if (( $+commands[yazi] )); then
-  alias yy='yazi'
-elif [[ -x "${HOMEBREW_PREFIX:-/opt/homebrew}/bin/yazi" ]]; then
-  alias yy="${HOMEBREW_PREFIX:-/opt/homebrew}/bin/yazi"
-fi
+alias pbc='pbcopy'
 
 # Media Player (mpv)
 if (( $+commands[mpv] )); then
