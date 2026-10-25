@@ -7,7 +7,37 @@
 
 MAX_WINS=10
 
-DATA=$(/opt/homebrew/bin/paneru query on-screen 2>/dev/null)
+# Locate paneru across architectures (Apple Silicon / Intel / PATH)
+PANERU_BIN="$(command -v paneru 2>/dev/null || true)"
+if [ -z "$PANERU_BIN" ]; then
+  if [ -x "/opt/homebrew/bin/paneru" ]; then
+    PANERU_BIN="/opt/homebrew/bin/paneru"
+  elif [ -x "/usr/local/bin/paneru" ]; then
+    PANERU_BIN="/usr/local/bin/paneru"
+  fi
+fi
+
+if [ -z "$PANERU_BIN" ]; then
+  exit 0
+fi
+
+# Locate jq across architectures & systems
+JQ_BIN="$(command -v jq 2>/dev/null || true)"
+if [ -z "$JQ_BIN" ]; then
+  if [ -x "/usr/local/bin/jq" ]; then
+    JQ_BIN="/usr/local/bin/jq"
+  elif [ -x "/opt/homebrew/bin/jq" ]; then
+    JQ_BIN="/opt/homebrew/bin/jq"
+  elif [ -x "/usr/bin/jq" ]; then
+    JQ_BIN="/usr/bin/jq"
+  fi
+fi
+
+if [ -z "$JQ_BIN" ]; then
+  exit 0
+fi
+
+DATA=$("$PANERU_BIN" query on-screen 2>/dev/null)
 if [ -z "$DATA" ] || [ "$DATA" = "null" ]; then
   exit 0
 fi
@@ -57,7 +87,7 @@ while IFS=$'\t' read -r IS_FOCUSED APP; do
   )
 
   INDEX=$((INDEX + 1))
-done < <(echo "$DATA" | /usr/bin/jq -r '.[] | "\(.focused)\t\(.app_name)"')
+done < <(echo "$DATA" | "$JQ_BIN" -r '.[] | "\(.focused)\t\(.app_name)"')
 
 for i in $(seq $INDEX $((MAX_WINS - 1))); do
   ARGS+=(--set "win.$i" drawing=off)

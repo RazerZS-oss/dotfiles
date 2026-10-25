@@ -2,19 +2,24 @@
 # 50-plugins.zsh - Syntax Highlighting & Autosuggestions
 # ==============================================================================
 
-# Search Homebrew share directory for plugins across architectures
+# Search Homebrew share directory for plugins across architectures (Apple Silicon & Intel)
 _brew_share="${HOMEBREW_PREFIX:-/opt/homebrew}/share"
 if [[ ! -d "$_brew_share" && -d "/usr/local/share" ]]; then
   _brew_share="/usr/local/share"
 fi
 
-# Load Plugins Safely
+# Load Syntax Highlighting Safely (Homebrew or Standalone Git clone in ~/.zsh)
 if [[ -f "$_brew_share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
   source "$_brew_share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+elif [[ -f "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+  source "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
 
+# Load Autosuggestions Safely (Homebrew or Standalone Git clone in ~/.zsh)
 if [[ -f "$_brew_share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
   source "$_brew_share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+elif [[ -f "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
 fi
 
 unset _brew_share

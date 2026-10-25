@@ -220,13 +220,28 @@ backup_and_link "${SOURCE_DIR}/config/paneru" "${TARGET_HOME}/.config/paneru"
 backup_and_link "${SOURCE_DIR}/config/sketchybar" "${TARGET_HOME}/.config/sketchybar"
 backup_and_link "${SOURCE_DIR}/config/yazi" "${TARGET_HOME}/.config/yazi"
 
-# 5. Setup fzf-tab plugin
+# 5. Setup Zsh Plugins (fzf-tab, autosuggestions, syntax-highlighting)
+mkdir -p "${TARGET_HOME}/.zsh"
+
 if [[ ! -d "${TARGET_HOME}/.zsh/fzf-tab" ]]; then
   log_info "Installing fzf-tab plugin..."
-  mkdir -p "${TARGET_HOME}/.zsh"
   git clone --depth=1 https://github.com/Aloxaf/fzf-tab "${TARGET_HOME}/.zsh/fzf-tab" 2>/dev/null || log_warn "Could not clone fzf-tab. Please check internet connection."
 else
   log_success "fzf-tab plugin already present."
+fi
+
+if [[ ! -d "${TARGET_HOME}/.zsh/zsh-autosuggestions" ]]; then
+  log_info "Installing zsh-autosuggestions plugin..."
+  git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions "${TARGET_HOME}/.zsh/zsh-autosuggestions" 2>/dev/null || log_warn "Could not clone zsh-autosuggestions."
+else
+  log_success "zsh-autosuggestions plugin already present."
+fi
+
+if [[ ! -d "${TARGET_HOME}/.zsh/zsh-syntax-highlighting" ]]; then
+  log_info "Installing zsh-syntax-highlighting plugin..."
+  git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting "${TARGET_HOME}/.zsh/zsh-syntax-highlighting" 2>/dev/null || log_warn "Could not clone zsh-syntax-highlighting."
+else
+  log_success "zsh-syntax-highlighting plugin already present."
 fi
 
 # 6. Optional macOS Speedup Tweaks

@@ -48,6 +48,14 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
 # Insert Mode Bindings
+# Hapus per kata dengan Option + Backspace (dan Ctrl + W)
+bindkey '^[^?' backward-kill-word
+bindkey '^[^H' backward-kill-word
+bindkey '^W' backward-kill-word
+
+# Loncat per kata dengan Option + Panah Kiri / Kanan
+bindkey '\eb' backward-word
+bindkey '\ef' forward-word
 bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
 bindkey '^K' up-line-or-beginning-search
