@@ -1,17 +1,28 @@
 #!/usr/bin/env zsh
 
-# Helper: Open Micro in Right Split Pane
+# Helper: Open Editor in Right Split Pane (Native Ghostty 1.3+ AppleScript)
 open_split_editor() {
   local target_file="$1"
-  osascript <<APPLESCRIPT
-tell application "System Events"
-  tell process "Ghostty"
-    keystroke "d" using {command down}
-    delay 0.15
-    keystroke "micro '${target_file}' && exit"
-    key code 36
+  local editor_bin="${EDITOR:-nvim}"
+  if ! command -v "$editor_bin" >/dev/null 2>&1; then
+    editor_bin="micro"
+  fi
+  local q_editor="${(q)editor_bin}"
+  local q_target="${(q)target_file}"
+  local shell_cmd="/bin/zsh -lc ${q_editor}\\ ${q_target}"
+
+  osascript - "$PWD" "$shell_cmd" <<'APPLESCRIPT'
+on run argv
+  set targetCwd to item 1 of argv
+  set editorCmd to item 2 of argv
+  tell application "Ghostty"
+    set cfg to new surface configuration
+    set initial working directory of cfg to targetCwd
+    set command of cfg to editorCmd
+    set curTerm to focused terminal of selected tab of front window
+    split curTerm direction right with configuration cfg
   end tell
-end tell
+end run
 APPLESCRIPT
 }
 
@@ -77,7 +88,7 @@ while true; do
         echo "• Micro Settings       (~/.config/micro/settings.json)"
         ;;
       *2.\ Switch*)
-        ghostty +list-themes 2>/dev/null | head -n 35
+        (ghostty +list-themes 2>/dev/null || /Applications/Ghostty.app/Contents/MacOS/ghostty +list-themes 2>/dev/null) | head -n 35
         ;;
       *3.\ Reload*)
         echo "RELOAD SHELL CONFIG\n\nInstantly sources ~/.zshrc to apply latest aliases, plugins, and keybindings."

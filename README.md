@@ -213,6 +213,19 @@ To revert macOS animations back to factory defaults at any time:
 
 ## Keybindings Cheat Sheet
 
+### Ghostty Splits & Per-Pane Zoom
+
+| Shortcut | Action |
+| :--- | :--- |
+| `Cmd + D` | Split pane to the right |
+| `Cmd + Shift + D` | Split pane downward |
+| `Cmd + Shift + ← / → / ↑ / ↓` | Move focus between split panes |
+| `Cmd + Ctrl + ← / → / ↑ / ↓` | Resize active split pane |
+| `Cmd + Ctrl + =` | Equalize split pane sizes |
+| `Cmd + Shift + Enter` | Toggle fullscreen zoom on active split |
+| `Cmd + +` / `Cmd + -` / `Cmd + 0` | Zoom font size independently on active split |
+| `Cmd + W` | Close active split surface |
+
 ### Paneru Window Management
 
 | Shortcut | Action |
